@@ -19,6 +19,7 @@ public class WebTestCard {
         options.addArguments("--no-sandbox");
         options.addArguments("--headless");
         driver = new ChromeDriver(options);
+        driver.get("http://localhost:9999/");
     }
 
     @AfterEach
@@ -27,10 +28,9 @@ public class WebTestCard {
         driver = null;
     }
     @Test
-    void shouldSendFormValidData(){
-        driver.get("http://localhost:9999/");
-        driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Иванов Степан");
-        driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79998886655");
+    void shouldSendFormValidValues(){
+        driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Енот-Енотов Енотович");
+        driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79111111111");
         driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
         driver.findElement(By.tagName("button")).click();
         String expected = "Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
